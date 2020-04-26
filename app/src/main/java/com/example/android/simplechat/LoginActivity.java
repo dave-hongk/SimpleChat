@@ -8,10 +8,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class LoginActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,10 +48,30 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (valid) {
-                    Toast.makeText(getApplicationContext(), "email and password valid", Toast.LENGTH_SHORT).show();
+                    logIn(emailStr, passwordStr);
                 }
             }
         });
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+    }
+
+    private void logIn(String emailStr, String passwordStr) {
+        // Start sign_in_with_email
+        mAuth.signInWithEmailAndPassword(emailStr, passwordStr)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     // TODO: update password validation thoroughly
