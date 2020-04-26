@@ -26,4 +26,12 @@
         android:layout_height="wrap_content"
         android:text="@string/login" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:indeterminate="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        style="?android:attr/progressBarStyleHorizontal"/>
+
 </LinearLayout>

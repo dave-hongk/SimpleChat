@@ -6,6 +6,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    private ProgressBar mProgressBar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText emailEditText = findViewById(R.id.edit_text_email);
         final EditText passwordEditText = findViewById(R.id.edit_text_password);
         Button logInButton = findViewById(R.id.button_login);
+        mProgressBar = findViewById(R.id.progress_bar);
 
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,11 +62,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void logIn(String emailStr, String passwordStr) {
+        mProgressBar.setVisibility(View.VISIBLE);
         // Start sign_in_with_email
         mAuth.signInWithEmailAndPassword(emailStr, passwordStr)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        mProgressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             // Sign in success
                             finish();
