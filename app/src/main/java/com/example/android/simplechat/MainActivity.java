@@ -1,18 +1,13 @@
 package com.example.android.simplechat;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.firebase.ui.auth.AuthUI;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Collections;
-
 public class MainActivity extends AppCompatActivity {
-
-    private static final int RC_SIGN_IN = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,18 +22,11 @@ public class MainActivity extends AppCompatActivity {
         if (shouldStartSignIn()) {
             startSignIn();
         }
-
     }
 
     private void startSignIn() {
-        // Sign in with FirebaseUI
-        Intent intent = AuthUI.getInstance().createSignInIntentBuilder()
-                .setAvailableProviders(Collections.singletonList(
-                        new AuthUI.IdpConfig.EmailBuilder().build()))
-                .setIsSmartLockEnabled(false)
-                .build();
-
-        startActivityForResult(intent, RC_SIGN_IN);
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     private boolean shouldStartSignIn() {

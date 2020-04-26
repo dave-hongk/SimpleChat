@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SimpleChat</string>
+
+    <string name="login">Log In</string>
+    <string name="email_hint">your_email@domain.com</string>
+    <string name="password">password</string>
 </resources>
