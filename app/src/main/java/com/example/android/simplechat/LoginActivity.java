@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private ProgressBar mProgressBar;
+    private Button mLogInButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,10 +32,10 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText emailEditText = findViewById(R.id.edit_text_email);
         final EditText passwordEditText = findViewById(R.id.edit_text_password);
-        Button logInButton = findViewById(R.id.button_login);
+        mLogInButton = findViewById(R.id.button_login);
         mProgressBar = findViewById(R.id.progress_bar);
 
-        logInButton.setOnClickListener(new View.OnClickListener() {
+        mLogInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 boolean valid = true;
@@ -52,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (valid) {
+                    mLogInButton.setEnabled(false);
                     logIn(emailStr, passwordStr);
                 }
             }
@@ -76,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
+                        mLogInButton.setEnabled(true);
                     }
                 });
     }
