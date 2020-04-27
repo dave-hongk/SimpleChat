@@ -2,6 +2,11 @@
     <string name="app_name">SimpleChat</string>
 
     <string name="login">Log In</string>
+    <string name="signup">Sign Up</string>
     <string name="email_hint">your_email@domain.com</string>
+    <string name="username_hint">Username</string>
     <string name="password">password</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="to_sign_up">Go to sign up</string>
+    <string name="to_log_in">Already have a username or ID? Go to log in.</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.android.simplechat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,10 +32,23 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if (mAuth != null && mAuth.getCurrentUser() != null) {
+            finish();
+        }
+
         final EditText emailEditText = findViewById(R.id.edit_text_email);
         final EditText passwordEditText = findViewById(R.id.edit_text_password);
+        TextView toSignUpTextView = findViewById(R.id.text_view_to_sign_up);
         mLogInButton = findViewById(R.id.button_login);
         mProgressBar = findViewById(R.id.progress_bar);
+
+        toSignUpTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mLogInButton.setOnClickListener(new View.OnClickListener() {
             @Override
